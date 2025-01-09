@@ -1,0 +1,59 @@
+{
+  "name": "@strapi-community/plugin-healthcheck",
+  "version": "1.0.0",
+  "description": "Adds additional API endpoints for checking health of Strapi Components",
+  "strapi": {
+    "kind": "plugin",
+    "name": "healthcheck",
+    "displayName": "HealthCheck",
+    "description": "Adds additional API endpoints for checking health of Strapi Components"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-server": {
+      "source": "./server/src/index.js",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@strapi/strapi": "^5.7.0",
+    "@strapi/sdk-plugin": "^5.3.0",
+    "prettier": "^3.4.2"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^5.7.0",
+    "@strapi/sdk-plugin": "^5.3.0"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Derrick Mehaffy",
+    "email": "derrickmehaffy@gmail.com",
+    "url": "https://github.com/derrickmehaffy"
+  },
+  "maintainers": [
+    {
+      "name": "Strapi Community",
+      "url": "https://github.com/strapi-community"
+    },
+    {
+      "name": "Derrick Mehaffy",
+      "email": "derrickmehaffy@gmail.com",
+      "url": "https://github.com/derrickmehaffy",
+      "lead": true
+    }
+  ]
+}
