@@ -173,26 +173,26 @@ module.exports = (env) => ({
     "memory": {
       "memory": {
         "total": {
-          "raw": 149.234375,
+          "raw": 148.984375,
           "text": "149 MB"
         },
         "used": {
-          "raw": 120.25354766845703,
-          "text": "120 MB"
+          "raw": 117.34453582763672,
+          "text": "117 MB"
         },
         "free": {
-          "raw": 28.980018615722656,
-          "text": "28.979515075683594 MB"
+          "raw": 31.63903045654297,
+          "text": "32 MB"
         },
         "max": {
           "raw": 4144,
           "text": "4144 MB"
         },
         "percent": {
-          "totalRaw": 80.58817977993142,
-          "totalText": "80.59 %",
-          "maxRaw": 2776.840121453251,
-          "maxText": "2.90 %"
+          "totalRaw": 78.77086269336654,
+          "totalText": "78.77 %",
+          "maxRaw": 2.831986143782332,
+          "maxText": "2.83 %"
         }
       }
     },
@@ -304,7 +304,7 @@ module.exports = (env) => ({
     "server": {
       "alive": true,
       "uptime": {
-        "raw": 5.153885642,
+        "raw": 5.126152349,
         "text": "0d 0h 0m 5s",
         "days": 0,
         "hours": 0,
@@ -318,22 +318,22 @@ module.exports = (env) => ({
             "text": "149 MB"
           },
           "used": {
-            "raw": 120.07933044433594,
-            "text": "120 MB"
+            "raw": 117.34453582763672,
+            "text": "117 MB"
           },
           "free": {
-            "raw": 28.90418243408203,
-            "text": "28.90367889404297 MB"
+            "raw": 31.63903045654297,
+            "text": "32 MB"
           },
           "max": {
             "raw": 4144,
             "text": "4144 MB"
           },
           "percent": {
-            "totalRaw": 80.60650830001312,
-            "totalText": "80.61 %",
-            "maxRaw": 2781.499737808075,
-            "maxText": "2.90 %"
+            "totalRaw": 78.77086269336654,
+            "totalText": "78.77 %",
+            "maxRaw": 2.831986143782332,
+            "maxText": "2.83 %"
           }
         }
       },
@@ -347,15 +347,15 @@ module.exports = (env) => ({
       "client": "postgres",
       "connections": {
         "max": 100,
-        "current": "18"
+        "current": "15"
       },
       "uptime": {
-        "raw": 2426348.907102,
-        "text": "28d 1h 59m 8s",
+        "raw": 2503002.43527,
+        "text": "28d 23h 16m 42s",
         "days": 28,
-        "hours": 1,
-        "minutes": 59,
-        "seconds": 8
+        "hours": 23,
+        "minutes": 16,
+        "seconds": 42
       },
       "size": {
         "raw": 17.502691,
