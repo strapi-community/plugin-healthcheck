@@ -1,11 +1,41 @@
 const { getService } = require('../utils');
 
 module.exports = {
-  async alive(ctx) {
-    return getService('server').uptime();
+  async ping(ctx) {
+    return {
+      data: {
+        message: 'pong',
+      },
+    };
+  },
+
+  async server(ctx) {
+    return {
+      data: await getService('response').transform('server'),
+    };
   },
 
   async database(ctx) {
-    return getService('database').uptime();
+    return {
+      data: await getService('response').transform('database'),
+    };
+  },
+
+  async all(ctx) {
+    return {
+      data: {
+        server: await getService('response').transform('server'),
+        database: await getService('response').transform('database'),
+      },
+    };
+  },
+
+  async teapot(ctx) {
+    ctx.status = 418;
+    return {
+      data: {
+        message: "I'm a teapot, short and stout. Here is my handle, here is my spout.",
+      },
+    };
   },
 };

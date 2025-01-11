@@ -1,12 +1,16 @@
 module.exports = {
   default: {
-    alive: {
-      detailedUptime: true,
+    server: {
+      uptime: true,
+      memory: true,
+      version: true,
     },
     database: {
       client: true,
+      connections: true,
+      uptime: true,
       size: true,
-      detailedUptime: true,
+      version: true,
     },
   },
   validator() {},

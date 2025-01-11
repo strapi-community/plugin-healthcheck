@@ -25,6 +25,16 @@
 - [🖐 Requirements](#-requirements)
 - [⏳ Installation](#-installation)
 - [🔧 Configuration](#-configuration)
+  - [Sample Configuration](#sample-configuration)
+  - [Configuration Options](#configuration-options)
+- [API Endpoints](#api-endpoints)
+  - [Ping Endpoint Sample](#ping-endpoint-sample)
+  - [Server Endpoint Sample](#server-endpoint-sample)
+  - [Database Endpoint Sample](#database-endpoint-sample)
+    - [PostgreSQL](#postgresql)
+    - [MySQL/MariaDB](#mysqlmariadb)
+    - [SQLite](#sqlite)
+  - [All Endpoint Sample](#all-endpoint-sample)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -45,13 +55,12 @@ This package's lead maintainer is an employee of Strapi however this package is 
 
 These are the primary features that are finished or currently being worked on:
 
-- [x] Generic `alive` endpoint to check if the server is running, current uptime, and version
-- [x] Generic `database` endpoint to check if the database is connected, current database uptime, total database size, and database version
-- [ ] Generic `server` endpoint to check if the server is running, current server uptime, server memory usage, and server version
-- [ ] Additional metrics for all endpoints as needed
-- [ ] Simple `ping` endpoint to check if the server is running (good for overall response time checking)
+- [x] Generic `ping` endpoint to check if the server is running (good for checking network response time)
+- [x] Generic `server` endpoint to check if the server is running, server uptime, server memory usage, and server/strapi version
+- [x] Generic `database` endpoint to check if the database is connected, current/max connections, current database uptime, total database size, and database version
+- [x] Generic `all` endpoint to check all components at once
+- [x] Completely configurable to disable any data you don't want to be shown
 - [ ] Integration with other plugins and providers (Redis, Upload, ect)
-- [ ] Combined `health` endpoint to check all components at once
 
 ## 🤔 Motivation
 
@@ -85,27 +94,277 @@ There is a very simple configuration to tailor the plugin to your needs and enab
 
 By default, all options are enabled, however you must enable specific endpoints in the Users-Permissions configuration or API Tokens Configuration to access them.
 
+### Sample Configuration
+
 ```javascript
 // ./config/plugins.js
 
 module.exports = (env) => ({
 // ...
   healthcheck: {
-    enabled: true, // Enable or disable the healthcheck plugin
+    enabled: true,
     config: {
-      alive: {
-        detailedUptime: true, // Enable or disable detailed uptime
-        version: true, // Enable or disable the version response
+      server: {
+        uptime: true,
+        memory: true,
+        version: true,
       },
       database: {
-        client: true, // Show or hide the database client
-        detailedUptime: true, // Enable or disable detailed uptime
-        size: true, // Enable or disable the database size response
-        version: true, // Enable or disable the version response
+        client: true,
+        connections: true,
+        uptime: true,
+        size: true,
+        version: true,
       },
-    }
+    },
   },
+// ...
 });
+```
+
+### Configuration Options
+
+| Option                 | Type    | Default | Description                    |
+|------------------------|---------|---------|--------------------------------|
+| `server`               | Object  | `{}`    | Server configuration options   |
+| `server.uptime`        | Boolean | `true`  | Show server uptime             |
+| `server.memory`        | Boolean | `true`  | Show server memory usage       |
+| `server.version`       | Boolean | `true`  | Show server version            |
+| `database`             | Object  | `{}`    | Database configuration options |
+| `database.client`      | Boolean | `true`  | Show database client           |
+| `database.connections` | Boolean | `true`  | Show database connections      |
+| `database.uptime`      | Boolean | `true`  | Show database uptime           |
+| `database.size`        | Boolean | `true`  | Show database size             |
+| `database.version`     | Boolean | `true`  | Show database version          |
+
+## API Endpoints
+
+| Endpoint                    | Description                                                | Sample Response                     |
+|-----------------------------|------------------------------------------------------------|-------------------------------------|
+| `/api/healthcheck/ping`     | Responds with a simple "Pong"                              | [Sample](#ping-endpoint-sample)     |
+| `/api/healthcheck/server`   | Responds with information about the Strapi and Node Server | [Sample](#server-endpoint-sample)   |
+| `/api/healthcheck/database` | Responds with information about the connected database     | [Sample](#database-endpoint-sample) |
+| `/api/healthcheck/all`      | Responds with with server and database information         | [Sample](#all-endpoint-sample)      |
+
+### Ping Endpoint Sample
+
+```json
+{
+  "data": {
+    "message": "pong"
+  }
+}
+```
+
+### Server Endpoint Sample
+
+```json
+{
+  "data": {
+    "alive": true,
+    "uptime": {
+      "raw": 10.052894558,
+      "text": "0d 0h 0m 10s",
+      "days": 0,
+      "hours": 0,
+      "minutes": 0,
+      "seconds": 10
+    },
+    "memory": {
+      "memory": {
+        "total": {
+          "raw": 149.234375,
+          "text": "149 MB"
+        },
+        "used": {
+          "raw": 120.25354766845703,
+          "text": "120 MB"
+        },
+        "free": {
+          "raw": 28.980018615722656,
+          "text": "28.979515075683594 MB"
+        },
+        "max": {
+          "raw": 4144,
+          "text": "4144 MB"
+        },
+        "percent": {
+          "totalRaw": 80.58817977993142,
+          "totalText": "80.59 %",
+          "maxRaw": 2776.840121453251,
+          "maxText": "2.90 %"
+        }
+      }
+    },
+    "version": {
+      "application": "0.1.0",
+      "strapi": "5.7.0"
+    }
+  }
+}
+```
+
+### Database Endpoint Sample
+
+#### PostgreSQL
+
+```json
+{
+  "data": {
+    "alive": true,
+    "client": "postgres",
+    "connections": {
+      "max": 100,
+      "current": "18"
+    },
+    "uptime": {
+      "raw": 2426042.935729,
+      "text": "28d 1h 54m 2s",
+      "days": 28,
+      "hours": 1,
+      "minutes": 54,
+      "seconds": 2
+    },
+    "size": {
+      "raw": 17.502691,
+      "text": "17.50 MB"
+    },
+    "version": "PostgreSQL: 16.6"
+  }
+}
+```
+
+#### MySQL/MariaDB
+
+```json
+{
+  "data": {
+    "alive": true,
+    "client": "mysql",
+    "connections": {
+      "max": 151,
+      "current": 13
+    },
+    "uptime": {
+      "raw": 170685,
+      "text": "1d 23h 24m 45s",
+      "days": 1,
+      "hours": 23,
+      "minutes": 24,
+      "seconds": 45
+    },
+    "size": {
+      "raw": 2.6050560000000003,
+      "text": "2.61 MB"
+    },
+    "version": "MariaDB: 11.6.2"
+  }
+}
+```
+
+#### SQLite
+
+> [!NOTE]
+> SQLite does not have a max connection limit, so that value is always 1.
+
+> [!IMPORTANT]
+> SQLite does not have an uptime value, so the Node process uptime is used instead.
+
+```json
+{
+  "data": {
+    "alive": true,
+    "client": "sqlite",
+    "connections": {
+      "max": 1,
+      "current": 1
+    },
+    "uptime": {
+      "raw": 4.93527706,
+      "text": "0d 0h 0m 4s",
+      "days": 0,
+      "hours": 0,
+      "minutes": 0,
+      "seconds": 4
+    },
+    "size": {
+      "raw": 0.90112,
+      "text": "0.90 MB"
+    },
+    "version": "SQLite: 3.46.1"
+  }
+}
+```
+
+### All Endpoint Sample
+
+```json
+{
+  "data": {
+    "server": {
+      "alive": true,
+      "uptime": {
+        "raw": 5.153885642,
+        "text": "0d 0h 0m 5s",
+        "days": 0,
+        "hours": 0,
+        "minutes": 0,
+        "seconds": 5
+      },
+      "memory": {
+        "memory": {
+          "total": {
+            "raw": 148.984375,
+            "text": "149 MB"
+          },
+          "used": {
+            "raw": 120.07933044433594,
+            "text": "120 MB"
+          },
+          "free": {
+            "raw": 28.90418243408203,
+            "text": "28.90367889404297 MB"
+          },
+          "max": {
+            "raw": 4144,
+            "text": "4144 MB"
+          },
+          "percent": {
+            "totalRaw": 80.60650830001312,
+            "totalText": "80.61 %",
+            "maxRaw": 2781.499737808075,
+            "maxText": "2.90 %"
+          }
+        }
+      },
+      "version": {
+        "application": "0.1.0",
+        "strapi": "5.7.0"
+      }
+    },
+    "database": {
+      "alive": true,
+      "client": "postgres",
+      "connections": {
+        "max": 100,
+        "current": "18"
+      },
+      "uptime": {
+        "raw": 2426348.907102,
+        "text": "28d 1h 59m 8s",
+        "days": 28,
+        "hours": 1,
+        "minutes": 59,
+        "seconds": 8
+      },
+      "size": {
+        "raw": 17.502691,
+        "text": "17.50 MB"
+      },
+      "version": "PostgreSQL: 16.6"
+    }
+  }
+}
 ```
 
 ## Contributing
