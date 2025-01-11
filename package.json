@@ -1,6 +1,6 @@
 {
   "name": "@strapi-community/plugin-healthcheck",
-  "version": "v1.0.1",
+  "version": "1.0.2",
   "description": "Adds additional API endpoints for checking health of Strapi Components",
   "strapi": {
     "kind": "plugin",
@@ -60,7 +60,16 @@
   "files": [
     "dist"
   ],
-  "keywords": ["strapi", "plugin", "healthcheck", "health", "health-check", "database", "debug", "debugging"],
+  "keywords": [
+    "strapi",
+    "plugin",
+    "healthcheck",
+    "health",
+    "health-check",
+    "database",
+    "debug",
+    "debugging"
+  ],
   "homepage": "https://github.com/strapi-community/plugin-healthcheck",
   "license": "MIT"
 }
