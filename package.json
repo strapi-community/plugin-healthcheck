@@ -8,37 +8,21 @@
     "displayName": "HealthCheck",
     "description": "Adds additional API endpoints for checking health of Strapi Components"
   },
-  "keywords": [],
-  "type": "commonjs",
-  "exports": {
-    "./package.json": "./package.json",
-    "./strapi-server": {
-      "source": "./server/src/index.js",
-      "import": "./dist/server/index.mjs",
-      "require": "./dist/server/index.js",
-      "default": "./dist/server/index.js"
-    }
+  "dependencies": {},
+  "devDependencies": {
+    "@strapi/sdk-plugin": "^5.3.0",
+    "prettier": "^3.4.2"
   },
-  "files": [
-    "dist"
-  ],
+  "peerDependencies": {
+    "@strapi/sdk-plugin": "^5.3.0",
+    "@strapi/strapi": "^5.0.0"
+  },
   "scripts": {
     "build": "strapi-plugin build",
     "watch": "strapi-plugin watch",
     "watch:link": "strapi-plugin watch:link",
     "verify": "strapi-plugin verify"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@strapi/sdk-plugin": "^5.3.0",
-    "@strapi/strapi": "^5.7.0",
-    "prettier": "^3.4.2"
-  },
-  "peerDependencies": {
-    "@strapi/sdk-plugin": "^5.3.0",
-    "@strapi/strapi": "^5.7.0"
-  },
-  "license": "MIT",
   "author": {
     "name": "Derrick Mehaffy",
     "email": "derrickmehaffy@gmail.com",
@@ -55,5 +39,28 @@
       "url": "https://github.com/derrickmehaffy",
       "lead": true
     }
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/strapi-community/plugin-healthcheck/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github:strapi-community/plugin-healthcheck"
+  },
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-server": {
+      "source": "./server/src/index.js",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": ["strapi", "plugin", "healthcheck", "health", "health-check", "database", "debug", "debugging"],
+  "homepage": "https://github.com/strapi-community/plugin-healthcheck",
+  "license": "MIT"
 }
