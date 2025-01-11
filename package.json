@@ -1,6 +1,6 @@
 {
   "name": "@strapi-community/plugin-healthcheck",
-  "version": "1.0.0",
+  "version": "v1.0.1",
   "description": "Adds additional API endpoints for checking health of Strapi Components",
   "strapi": {
     "kind": "plugin",
@@ -30,13 +30,13 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@strapi/strapi": "^5.7.0",
     "@strapi/sdk-plugin": "^5.3.0",
+    "@strapi/strapi": "^5.7.0",
     "prettier": "^3.4.2"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^5.7.0",
-    "@strapi/sdk-plugin": "^5.3.0"
+    "@strapi/sdk-plugin": "^5.3.0",
+    "@strapi/strapi": "^5.7.0"
   },
   "license": "MIT",
   "author": {
