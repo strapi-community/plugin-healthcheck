@@ -16,8 +16,10 @@ module.exports = {
         free: {
           raw: (process.memoryUsage().heapTotal - process.memoryUsage().heapUsed) / 1024 / 1024,
           text:
-            (process.memoryUsage().heapTotal - process.memoryUsage().heapUsed) / 1024 / 1024 +
-            ' MB',
+            Math.round(
+              (process.memoryUsage().heapTotal - process.memoryUsage().heapUsed) / 1024 / 1024,
+              2
+            ) + ' MB',
         },
         max: {
           raw: v8.getHeapStatistics().heap_size_limit / 1024 / 1024,
@@ -28,7 +30,7 @@ module.exports = {
           totalText:
             ((process.memoryUsage().heapUsed / process.memoryUsage().heapTotal) * 100).toFixed(2) +
             ' %',
-          maxRaw: (v8.getHeapStatistics().heap_size_limit / process.memoryUsage().heapTotal) * 100,
+          maxRaw: (process.memoryUsage().heapUsed / v8.getHeapStatistics().heap_size_limit) * 100,
           maxText:
             (
               (process.memoryUsage().heapUsed / v8.getHeapStatistics().heap_size_limit) *
