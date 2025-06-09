@@ -1,6 +1,6 @@
 {
   "name": "@strapi-community/plugin-healthcheck",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Adds additional API endpoints for checking health of Strapi Components",
   "strapi": {
     "kind": "plugin",
