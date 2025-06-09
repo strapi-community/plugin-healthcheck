@@ -5,6 +5,10 @@ module.exports = {
     return strapi.config.database.connection.client;
   },
 
+  name() {
+    return strapi.config.database.connection.connection.database || 'strapi';
+  },
+
   async connections() {
     const database = strapi.db.connection;
     const client = this.client();
@@ -102,6 +106,7 @@ module.exports = {
   async size() {
     const database = strapi.db.connection;
     const client = this.client();
+    const name = this.name();
 
     let size;
     let querySize;
@@ -109,7 +114,7 @@ module.exports = {
     switch (client) {
       case 'postgres':
         try {
-          querySize = await database.raw("SELECT pg_database_size('strapi') as size;");
+          querySize = await database.raw(`SELECT pg_database_size('${name()}') as size;`);
           size = {
             raw: querySize.rows[0].size / 1000 / 1000,
             text: `${(querySize.rows[0].size / 1000 / 1000).toFixed(2)} MB`,
@@ -122,7 +127,7 @@ module.exports = {
       case 'mysql':
         try {
           querySize = await database.raw(
-            'SELECT table_schema AS "database", sum(data_length + index_length) AS "size" FROM information_schema.TABLES where table_schema = "strapi";'
+            `SELECT table_schema AS "database", sum(data_length + index_length) AS "size" FROM information_schema.TABLES where table_schema = "${name()}";`
           );
           size = {
             raw: querySize[0][0].size / 1000 / 1000,
