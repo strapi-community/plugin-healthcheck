@@ -1,13 +1,16 @@
 name: Publish to NPM
+
 on:
   release:
     types: [published]
+
+permissions:
+  id-token: write # Required for NPM OIDC
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,7 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           always-auth: true
-          node-version: 20
+          node-version: 22
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org/'
       - name: Install dependencies
@@ -29,8 +32,6 @@ jobs:
         run: yarn version --new-version "${{ steps.get_version.outputs.VERSION }}" --no-git-tag-version
       - name: Publish package
         run: yarn publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Push version bump
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
