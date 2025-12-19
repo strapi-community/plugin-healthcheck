@@ -40,7 +40,7 @@
 
 ## 🚦 Current Status
 
-This package is currently maintained and should be considered **Beta** in terms of state. I/We are currently accepting contributions and/or dedicated contributors to help develop and maintain this package.
+This package is currently maintained and should be considered **Stable** in terms of state. I/We are currently accepting contributions and/or dedicated contributors to help develop and maintain this package.
 
 For more information on contributing please see [the contrib message below](#contributing).
 
@@ -77,7 +77,7 @@ Supported Strapi Versions:
 |----------------|----------------|-----------|-----------|
 | v3.x.x         | N/A            | ❌         | N/A       |
 | v4.x.x         | N/A            | ❌         | N/A       |
-| v5.x.x         | >= 1.0.0       | ✅         | Jan 2025  |
+| v5.x.x         | >= 1.0.0       | ✅         | Dec 2025  |
 
 ## ⏳ Installation
 
