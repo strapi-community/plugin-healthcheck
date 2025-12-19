@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           always-auth: true
-          node-version: 22
+          node-version: 2
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org/'
       - name: Install dependencies
@@ -31,7 +31,7 @@ jobs:
       - name: Set package version
         run: yarn version --new-version "${{ steps.get_version.outputs.VERSION }}" --no-git-tag-version
       - name: Publish package
-        run: yarn publish --access public
+        run: npm publish --access public
       - name: Push version bump
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
