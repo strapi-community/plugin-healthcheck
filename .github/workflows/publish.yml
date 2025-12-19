@@ -21,6 +21,8 @@ jobs:
           node-version: 22
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org/'
+      - name: Update NPM CLI to latest
+        run: npm i -g npm@latest
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build the plugin
