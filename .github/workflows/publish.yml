@@ -6,7 +6,7 @@ on:
 
 permissions:
   id-token: write # Required for NPM OIDC
-  contents: read
+  contents: write # Required for Version Bump
 
 jobs:
   publish:
