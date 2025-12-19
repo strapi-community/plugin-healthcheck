@@ -60,6 +60,7 @@ These are the primary features that are finished or currently being worked on:
 - [x] Generic `database` endpoint to check if the database is connected, current/max connections, current database uptime, total database size, and database version
 - [x] Generic `all` endpoint to check all components at once
 - [x] Completely configurable to disable any data you don't want to be shown
+- [x] Optional Dashboard that can be added to give a visual view to your healthcheck data (beta)
 - [ ] Integration with other plugins and providers (Redis, Upload, ect)
 
 ## 🤔 Motivation
